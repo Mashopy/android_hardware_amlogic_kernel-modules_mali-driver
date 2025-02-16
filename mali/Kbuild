@@ -27,7 +27,7 @@ MALI_ENABLE_CPU_CYCLES ?= 0
 # For customer releases the Linux Device Drivers will be provided as ARM proprietary and GPL releases:
 # The ARM proprietary product will only include the license/proprietary directory
 # The GPL product will only include the license/gpl directory
-ifeq ($(wildcard $(src)/linux/license/gpl/*),)
+ifeq ($(wildcard $(srctree)/$(src)/linux/license/gpl/*),)
     ccflags-y += -I$(src)/linux/license/proprietary
     ifeq ($(CONFIG_MALI400_PROFILING),y)
         $(error Profiling is incompatible with non-GPL license)
@@ -199,7 +199,7 @@ endif
 ccflags-$(CONFIG_MALI400_DEBUG) += -DDEBUG
 
 # Use our defines when compiling
-ccflags-y += -I$(src) -I$(src)/include -I$(src)/common -I$(src)/linux -I$(src)/platform
+ccflags-y += -I../r10p1 -I../r10p1/include -I../r10p1/common -I../r10p1/linux -I../r10p1/platform
 
 # Get subversion revision number, fall back to only ${MALI_RELEASE_NAME} if no svn info is available
 MALI_RELEASE_NAME=$(shell cat $(src)/.version 2> /dev/null)

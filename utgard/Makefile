@@ -28,8 +28,9 @@ EXTRA_INCLUDE := -I$(KERNEL_SRC)/$(M)/../utgard/$(GPU_DRV_VERSION)/include \
 KBUILD_CFLAGS_MODULE += $(GKI_EXT_MODULE_PREDEFINE)
 
 modules:
-	cd $(M)/$(GPU_DRV_VERSION); \
-	ln -s $(M)/platform platform; \
+	cd ../mali; \
+	rm -rf platform; \
+	ln -s ../utgard/platform platform; \
 	$(MAKE) -C $(KERNEL_SRC) M=$(M)/$(GPU_DRV_VERSION)  \
 	EXTRA_CFLAGS="-DCONFIG_MALI400=m -DCONFIG_MALI450=m" \
 	EXTRA_CFLAGS+="-Wno-error -Wno-pointer-sign -Wno-error=frame-larger-than= $(EXTRA_INCLUDE) $(KBUILD_CFLAGS_MODULE)" \
